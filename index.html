@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="shortcut icon" href="fav.png" type="image/png">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            --error-gradient: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --border-color: #e2e8f0;
+            --border-focus: #667eea;
+            --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 25px 50px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            background: var(--primary-gradient);
+            background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 12s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-gradient);
+            top: 5%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-gradient);
+            top: 60%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-gradient);
+            bottom: 20%;
+            left: 25%;
+            animation-delay: 6s;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            background: var(--secondary-gradient);
+            top: 40%;
+            right: 25%;
+            animation-delay: 9s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0px) translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.1;
+            }
+            25% {
+                transform: translateX(40px) translateY(-40px) rotate(90deg) scale(1.1);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translateX(-30px) translateY(30px) rotate(180deg) scale(0.9);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateX(30px) translateY(-20px) rotate(270deg) scale(1.05);
+                opacity: 0.15;
+            }
+        }
+
+        .main-container {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-section {
+            padding: 60px 40px;
+            color: white;
+            animation: slideInLeft 1s ease-out;
+            position: relative;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+
+        .info-section h1 {
+            font-size: 3.5rem; /* Larger for impact */
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .info-section .subtitle {
+            font-size: 1.3rem; /* Slightly larger for readability */
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 40px; /* More space before HR */
+            opacity: 0.9;
+        }
+
+        .info-section hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 40px; /* More space after HR */
+            width: 80px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08); /* Slightly more prominent */
+            backdrop-filter: blur(12px); /* Increased blur */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+            transition: var(--transition-smooth);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.15); /* More prominent on hover */
+            transform: translateY(-3px) scale(1.02); /* More pronounced lift */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+        }
+
+        .social-link i {
+            font-size: 1.6rem; /* Slightly larger icons */
+            margin-right: 18px; /* More space */
+            width: 32px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8); /* Faded icon color */
+        }
+
+        .social-link.linkedin:hover { background: rgba(0, 119, 181, 0.3); } /* Stronger hover color */
+        .social-link.github:hover { background: rgba(36, 41, 46, 0.3); }
+        .social-link.twitter:hover { background: rgba(29, 161, 242, 0.3); }
+        .social-link.instagram:hover { background: rgba(193, 53, 132, 0.3); }
+
+
+        .contact-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(40px);
+            border-radius: 32px;
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.12),
+                0 8px 16px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            padding: 60px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 1s ease-out;
+            transform-origin: center center; /* For potential scaling effects */
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px; /* Thicker accent line */
+            background: var(--primary-gradient);
+            border-radius: 32px 32px 0 0;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .form-header h2 {
+            color: var(--text-primary);
+            font-size: 2.8rem; /* Slightly larger */
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em; /* Tighter spacing */
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 1.2rem; /* Slightly larger */
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 36px; /* Increased margin */
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: 700; /* Bolder label */
+            margin-bottom: 14px; /* More space */
+            font-size: 1rem; /* Slightly larger label */
+            letter-spacing: 0.02em; /* More distinct spacing */
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 20px 24px;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 1.05rem; /* Slightly larger text */
+            font-family: inherit;
+            transition: var(--transition-smooth);
+            background: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            font-weight: 500; /* Medium weight */
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-3px); /* More pronounced lift on focus */
+            box-shadow: 
+                0 16px 32px rgba(102, 126, 234, 0.2), /* Stronger shadow */
+                var(--shadow-glow);
+        }
+
+        .form-group input:valid:not(:placeholder-shown), /* Apply valid style only when filled */
+        .form-group select:valid:not([value=""]), /* Apply valid style only when an option is selected */
+        .form-group textarea:valid:not(:placeholder-shown) {
+            border-color: #48bb78;
+        }
+
+        .form-group input:invalid:not(:focus):not(:placeholder-shown),
+        .form-group select:invalid:not(:focus):not([value=""]):not(:first-child),
+        .form-group textarea:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #e53e3e; /* Error color for invalid input */
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 180px; /* Taller textarea */
+            line-height: 1.7; /* Better line height */
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 8 l4 4 l4 -4'/%3e%3c/svg%3e");
+            background-position: right 20px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 52px;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 22px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.15rem; /* Slightly larger text */
+            font-weight: 700; /* Bolder text */
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            letter-spacing: 0.02em; /* More distinct spacing */
+            text-transform: uppercase; /* Uppercase for prominence */
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-4px); /* More lift on hover */
+            box-shadow: 
+                0 24px 48px rgba(102, 126, 234, 0.3), /* Stronger shadow */
+                0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .send-btn:active {
+            transform: translateY(-2px); /* Consistent active state */
+            box-shadow: 
+                0 10px 20px rgba(102, 126, 234, 0.2),
+                0 4px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6; /* More faded for disabled */
+            cursor: not-allowed;
+            filter: grayscale(20%);
+            transform: none; /* No lift when disabled */
+            box-shadow: none;
+        }
+
+        .send-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); /* Stronger shimmer */
+            transition: left 0.8s ease;
+        }
+
+        .send-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        .message {
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px; /* More margin */
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            animation: slideInDown 0.6s ease;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        .success-message {
+            background: var(--success-gradient);
+            color: white;
+            box-shadow: 0 8px 16px rgba(72, 187, 120, 0.3); /* Green shadow */
+        }
+
+        .error-message {
+            background: var(--error-gradient);
+            color: white;
+            box-shadow: 0 8px 16px rgba(245, 101, 101, 0.3); /* Red shadow */
+        }
+
+        .loading-spinner {
+            width: 22px; /* Slightly larger spinner */
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3); /* Thicker border */
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite; /* Faster spin */
+            display: none;
+            margin-right: 15px; /* More space */
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-focus-effect {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: var(--transition-smooth);
+            transform: translateX(-50%);
+            border-radius: 0 0 16px 16px;
+        }
+
+        .form-group input:focus ~ .input-focus-effect,
+        .form-group select:focus ~ .input-focus-effect,
+        .form-group textarea:focus ~ .input-focus-effect {
+            width: 100%;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px); /* More pronounced slide */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px); /* More pronounced slide */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px); /* More pronounced slide */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px); /* More pronounced slide */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+
+        .send-btn {
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                gap: 60px;
+            }
+            
+            .info-section {
+                padding: 40px 30px;
+            }
+            
+            .contact-container {
+                padding: 50px 40px;
+            }
+
+            .info-section h1 {
+                font-size: 3rem;
+            }
+
+            .info-section .subtitle {
+                font-size: 1.15rem;
+            }
+
+            .form-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                max-width: 700px;
+            }
+            
+            .info-section {
+                display: none; /* Hide social links section on mobile */
+            }
+            
+            .contact-container {
+                margin: 0 auto;
+                max-width: 100%;
+                transform: translateY(0) !important; /* Override potential floating effect for better mobile layout */
+                animation: fadeInUp 1s ease-out; /* Apply a different entrance animation for mobile */
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                background-size: cover;
+                background-attachment: fixed; /* Keep background fixed for better mobile scrolling */
+            }
+            
+            .contact-container {
+                padding: 40px 24px;
+            }
+            
+            .form-header h2 {
+                font-size: 2.2rem;
+                margin-bottom: 12px;
+            }
+
+            .form-header p {
+                font-size: 1rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 16px 20px;
+                font-size: 0.95rem;
+            }
+
+            .form-group textarea {
+                min-height: 140px;
+            }
+
+            .send-btn {
+                padding: 18px;
+                font-size: 1.05rem;
+            }
+
+            .floating-shape:nth-child(1) {
+                width: 200px;
+                height: 200px;
+            }
+
+            .floating-shape:nth-child(2) {
+                width: 150px;
+                height: 150px;
+            }
+
+            .floating-shape:nth-child(3) {
+                width: 100px;
+                height: 100px;
+            }
+
+            .floating-shape:nth-child(4) {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-container {
+                padding: 30px 20px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 14px 18px;
+                font-size: 0.9rem;
+            }
+
+            .send-btn {
+                padding: 16px;
+                font-size: 1rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .send-btn:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 4px; /* More prominent outline */
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="main-container">
+        <div class="info-section">
+            <h1>Let's Connect</h1>
+            <p class="subtitle">Ready to take your project to the next level? We're here to help you achieve your goals with our professional services and innovative solutions.</p>
+            <hr>
+            <div class="social-links">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link linkedin">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link github">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link twitter">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:patelpriyank2526@gmail.com" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-container">
+            <div class="form-header">
+                <h2>Get In Touch</h2>
+                <p>Send us a message and we'll get back to you within 24 hours</p>
+            </div>
+
+            <div class="message success-message" id="successMessage">
+                <strong>Form sent successfully!</strong> Thank you for contacting us.
+            </div>
+            <div class="message error-message" id="errorMessage">
+                <strong>Oops!</strong> Something went wrong. Please try again.
+            </div>
+
+            <form id="contactForm" action="https://formspree.io/f/xeokrkdj" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name" autocomplete="name">
+                        <div class="input-focus-effect"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com" autocomplete="email">
+                        <div class="input-focus-effect"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="site">Service Interest</label>
+                    <div class="input-wrapper">
+                        <select id="site" name="site" required>
+                            <option value="">Select a service</option>
+                            <option value="websync">WebSync</option>
+                            <option value="cineverse">CineVerse 2025</option>
+                            <option value="cvrecommendation">CVRecommendation</option>
+                            <option value="other">Other Services</option>
+                        </select>
+                        <div class="input-focus-effect"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <div class="input-wrapper">
+                        <textarea id="message" name="message" required placeholder="Tell us about your project, requirements or how we can help you achieve your goals..."></textarea>
+                        <div class="input-focus-effect"></div>
+                    </div>
+                </div>
+
+                <input type="text" name="_gotcha" style="display: none;">
+
+                <button type="submit" class="send-btn" id="submitBtn">
+                    <div class="btn-content">
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                        <span id="btnText">Send Message</span>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = this;
+
+            const formData = new FormData(form);
+
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+            loadingSpinner.style.display = 'inline-block';
+
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.ok) {
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    form.reset();
+                    // Manually reset border colors after successful submission
+                    inputs.forEach(input => {
+                        input.style.borderColor = '#e2e8f0';
+                    });
+                    validateForm();
+
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                } else {
+                    throw new Error(result.error || 'Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                
+                errorMessage.innerHTML = `
+                    <strong>Oops!</strong> ${error.message.includes('Invalid form id') 
+                        ? 'Invalid Formspree ID. Please check your form configuration.' 
+                        : 'Something went wrong. Please try again or contact us directly at support@example.com.'
+                    }
+                `;
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send Message';
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        const formGroups = document.querySelectorAll('.form-group');
+        
+        formGroups.forEach(group => {
+            const input = group.querySelector('input, select, textarea');
+            if (input) {
+                input.addEventListener('focus', () => {
+                    group.style.transform = 'translateY(-3px)'; // More lift on focus for the whole group
+                    group.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                input.addEventListener('blur', () => {
+                    group.style.transform = 'translateY(0)';
+                    // Re-validate on blur to show immediate feedback if invalid
+                    handleValidationVisuals(input);
+                });
+
+                input.addEventListener('input', () => {
+                    handleValidationVisuals(input);
+                });
+
+                 // Initial check for pre-filled inputs (e.g., from browser autocomplete)
+                handleValidationVisuals(input);
+            }
+        });
+
+        function handleValidationVisuals(input) {
+            if (input.validity.valid && input.value.trim() !== '') {
+                input.style.borderColor = '#48bb78'; // Green for valid
+            } else if (input.value.trim() !== '' && !input.validity.valid) {
+                input.style.borderColor = '#f56565'; // Red for invalid (if filled)
+            } else {
+                input.style.borderColor = '#e2e8f0'; // Default if empty
+            }
+        }
+
+        let ticking = false;
+        
+        document.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const shapes = document.querySelectorAll('.floating-shape');
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    
+                    shapes.forEach((shape, index) => {
+                        const speed = (index + 1) * 0.3;
+                        const xOffset = (x - 0.5) * speed * 40; // Increased movement
+                        const yOffset = (y - 0.5) * speed * 40;
+                        
+                        shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                    });
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        const textarea = document.getElementById('message');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.max(180, this.scrollHeight) + 'px'; // Adjusted initial min-height
+        });
+
+        const form = document.getElementById('contactForm');
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+        
+        function validateForm() {
+            let isValid = true;
+            inputs.forEach(input => {
+                // For select, check if a non-empty option is selected
+                if (input.tagName === 'SELECT') {
+                    if (input.value === '') {
+                        isValid = false;
+                    }
+                } else if (!input.validity.valid || input.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = !isValid; // Disable if not valid
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', validateForm);
+            input.addEventListener('change', validateForm); // For select elements
+            handleValidationVisuals(input); // Apply initial validation visuals
+        });
+
+        validateForm(); // Initial validation check on page load
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                const submitBtn = document.getElementById('submitBtn');
+                if (!submitBtn.disabled) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        // Responsive adjustments for contact container max-height and overflow
+        function applyResponsiveContainerStyles() {
+            const contactContainer = document.querySelector('.contact-container');
+            if (window.innerWidth <= 968) { // Changed breakpoint to 968px as info-section hides there
+                contactContainer.style.maxHeight = '90vh';
+                contactContainer.style.overflowY = 'auto';
+            } else {
+                contactContainer.style.maxHeight = 'none';
+                contactContainer.style.overflowY = 'visible';
+            }
+        }
+
+        window.addEventListener('resize', applyResponsiveContainerStyles);
+        applyResponsiveContainerStyles(); // Initial check on page load
+    </script>
+</body>
+</html>
